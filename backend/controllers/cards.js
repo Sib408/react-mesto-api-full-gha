@@ -3,7 +3,7 @@ const { BadRequestError, NotFoundError, ForbiddenError } = require('../utils/err
 
 const getCards = (req, res, next) => {
   Card.find({})
-    .then((cards) => res.send({ data: cards }))
+    .then((cards) => res.send(cards))
     .catch(next);
 };
 
@@ -11,7 +11,8 @@ const createCard = (req, res, next) => {
   const { name, link } = req.body;
 
   Card.create({ name, link, owner: req.user._id })
-    .then((card) => res.send({ data: card }))
+    .populate('owner')
+    .then((card) => res.send(card.reserve()))
     .catch((err) => {
       if (err.name === 'ValidationError') {
         return next(new BadRequestError('Некорректные данные'));
@@ -44,7 +45,7 @@ const likeCard = (req, res, next) => {
       if (!card) {
         return next(new NotFoundError('Карточка не найдена'));
       }
-      return res.send({ data: card });
+      return res.send(card);
     })
     .catch((err) => {
       if (err.name === 'CastError') {
@@ -64,7 +65,7 @@ const dislikeCard = (req, res, next) => {
       if (!card) {
         return next(new NotFoundError('Карточка не найдена'));
       }
-      return res.send({ data: card });
+      return res.send(card);
     })
     .catch((err) => {
       if (err.name === 'CastError') {

@@ -34,17 +34,17 @@ const login = (req, res, next) => {
 
 const getUsers = (req, res, next) => {
   User.find({})
-    .then((users) => res.status(STATUS_OK).send({ data: users }))
+    .then((users) => res.status(STATUS_OK).send(users))
     .catch(next);
 };
 
 const getUserById = (req, res, next) => {
   User.findById(req.params.userId)
-    .then((users) => {
-      if (!users) {
+    .then((user) => {
+      if (!user) {
         return next(new NotFoundError('Пользователь не найден'));
       }
-      return res.status(STATUS_OK).send({ data: users });
+      return res.status(STATUS_OK).send(user);
     })
     .catch((err) => {
       if (err.name === 'CastError') {
@@ -57,7 +57,7 @@ const getUserById = (req, res, next) => {
 const getCurrentUser = (req, res, next) => {
   User.findById(req.user._id)
     .then((users) => {
-      res.send({ data: users });
+      res.send(users);
     })
     .catch((err) => next(err));
 };
@@ -71,12 +71,10 @@ const createUsers = (req, res, next) => {
       name, about, avatar, email, password: hash,
     }))
     .then((user) => res.status(STATUS_CREATED).send({
-      data: {
-        name: user.name,
-        about: user.about,
-        avatar: user.avatar,
-        email: user.email,
-      },
+      name: user.name,
+      about: user.about,
+      avatar: user.avatar,
+      email: user.email,
     }))
     .catch((err) => {
       if (err.code === 11000) {
@@ -92,11 +90,11 @@ const createUsers = (req, res, next) => {
 const updateUser = (req, res, next) => {
   const { name, about } = req.body;
   User.findByIdAndUpdate(req.user._id, { name, about }, { new: true, runValidators: true })
-    .then((users) => {
-      if (!users) {
+    .then((user) => {
+      if (!user) {
         return next(new NotFoundError('Пользователь не найден'));
       }
-      return res.send({ data: users });
+      return res.send(user);
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
@@ -109,11 +107,11 @@ const updateUser = (req, res, next) => {
 const updateAvatar = (req, res, next) => {
   const { avatar } = req.body;
   User.findByIdAndUpdate(req.user._id, { avatar }, { new: true, runValidators: true })
-    .then((users) => {
-      if (!users) {
+    .then((user) => {
+      if (!user) {
         return next(new NotFoundError('Пользователь не найден'));
       }
-      return res.send({ data: users });
+      return res.send(user);
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
