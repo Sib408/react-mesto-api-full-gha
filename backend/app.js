@@ -16,7 +16,13 @@ app.use(cookieParser());
 
 app.use(requestLogger);
 mongoose.connect('mongodb://127.0.0.1:27017/mestodb');
-app.use(cors());
+app.use(cors({
+  origin: [
+    'http://localhost:3000',
+    'https://api.sib408.mesto.nomoredomains.xyz',
+  ],
+  credentials: true,
+}));
 app.use(router);
 app.use(errorHandler);
 app.use(errorLogger);
