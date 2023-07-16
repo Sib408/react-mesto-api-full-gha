@@ -14,6 +14,7 @@ export class Api {
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
       headers: this._headers,
+      credentials: 'include',
     })
     .then(this._checkServerResponse);
   }
@@ -21,6 +22,7 @@ export class Api {
   getProfile() {
     return fetch(`${this._baseUrl}/users/me`, {
       headers: this._headers,
+      credentials: 'include',
     })
     .then(this._checkServerResponse);
   }
@@ -30,6 +32,7 @@ export class Api {
     return fetch(`${this._baseUrl}/cards`, {
         method: "POST",
         headers: this._headers,
+        credentials: 'include',
         body: JSON.stringify({
             name,
             link
@@ -43,6 +46,7 @@ export class Api {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
       headers: this._headers,
+      credentials: 'include',
       body: JSON.stringify({
         name,
          about,
@@ -54,6 +58,7 @@ export class Api {
     return fetch(`${this._baseUrl}/cards/${id}`, {
       method: "DELETE",
       headers: this._headers,
+      credentials: 'include',
     })
     .then(this._checkServerResponse);
   }
@@ -62,6 +67,7 @@ export class Api {
     return fetch(`${this._baseUrl}/cards/${id}/likes`, {
       method: "PUT",
       headers: this._headers,
+      credentials: 'include',
     })
     .then(this._checkServerResponse);
   }
@@ -70,6 +76,7 @@ export class Api {
     return fetch(`${this._baseUrl}/cards/${id}/likes`, {
       method: "DELETE",
       headers: this._headers,
+      credentials: 'include',
     })
     .then(this._checkServerResponse);
   }
@@ -78,6 +85,7 @@ export class Api {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: "PATCH",
       headers: this._headers,
+      credentials: 'include',
       body: JSON.stringify({
         avatar,
       }),
@@ -87,9 +95,11 @@ export class Api {
 }
 
 export const api = new Api({
-  baseUrl: "https://mesto.nomoreparties.co/v1/cohort-61",
-  headers: {
-    authorization: "ade24f25-d7dd-4edc-be9d-87af9f2eb31d",
-    "Content-Type": "application/json",
-  },
+  // baseUrl: "https://mesto.nomoreparties.co/v1/cohort-61",
+  baseUrl: "http://localhost:3000",
+  // baseUrl: "https://api.sib408.mesto.nomoredomains.xyz",
+  // headers: {
+  //   authorization: "ade24f25-d7dd-4edc-be9d-87af9f2eb31d",
+  //   "Content-Type": "application/json",
+  // },
 });

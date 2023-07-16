@@ -19,6 +19,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/mestodb');
 app.use(cors({
   origin: [
     'http://localhost:3000',
+    'http://localhost:3001',
     'https://api.sib408.mesto.nomoredomains.xyz',
   ],
   credentials: true,

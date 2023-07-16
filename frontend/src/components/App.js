@@ -49,12 +49,12 @@ function App() {
   }
 
   function handleTokenCheck() {
-    const jwt = localStorage.getItem("jwt");
-    if (jwt) {
-      getContent(jwt)
+    const token = localStorage.getItem("userId");
+    if (token) {
+      getContent(token)
         .then((res) => {
           if (res) {
-            setUserInfo({ email: res.data.email });
+            setUserInfo({ email: res.email });
             setLoggedIn(true);
             navigate("/");
           }
@@ -64,7 +64,7 @@ function App() {
   }
 
   function handleCardLike(card) {
-    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+    const isLiked = card.likes.some((id) => id === currentUser._id);
     if (!isLiked) {
       api
         .addLike(card._id, true)
@@ -168,7 +168,7 @@ function App() {
     authorize(email, password)
       .then((result) => {
         if (result) {
-          localStorage.setItem("jwt", result.token);
+          localStorage.setItem("userId", result.token);
           setLoggedIn(true);
           navigate("/");
           setUserInfo(email);
@@ -186,8 +186,8 @@ function App() {
   function handleSignOut() {
     setLoggedIn(false);
     setUserInfo("");
-    localStorage.removeItem("jwt");
-    navigate("/sign-in");
+    localStorage.removeItem('userId');
+    navigate("/signin");
   }
 
   return (

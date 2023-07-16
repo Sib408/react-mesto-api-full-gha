@@ -8,7 +8,7 @@ const validateToken = (req, res, next) => {
   try {
     payload = jwt.verify(token, 'secret-person-key');
   } catch (err) {
-    return next(new UnauthorizedError('Authorization required'));
+    return next(new UnauthorizedError('Необходима авторизация'));
   }
 
   req.user = payload;

@@ -1,4 +1,6 @@
-export const BASE_URL = 'https://auth.nomoreparties.co';
+//export const BASE_URL = 'https://auth.nomoreparties.co';
+export const BASE_URL = "http://localhost:3000";
+  // export const BASE_URL =  "https://api.sib408.mesto.nomoredomains.xyz",
 
 function checkServerResponse(res) {
   if (res.ok) {
@@ -11,6 +13,7 @@ function checkServerResponse(res) {
 export const register = (password, email) => {
   return fetch(`${BASE_URL}/signup`, {
     method: 'POST',
+    credentials: 'include',
     headers: {
       "Content-Type": "application/json"
     },
@@ -22,20 +25,26 @@ export const register = (password, email) => {
 export const authorize = (password, email) => {
   return fetch(`${BASE_URL}/signin`, {
     method: 'POST',
+    credentials: 'include',
     headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({ password, email })
   })
-    .then((res) => checkServerResponse(res));
+    .then((res) => checkServerResponse(res))
+    .then((data) => { localStorage.setItem('userId', data._id)
+    return data;
+  });
+
 };
 
 export const getContent = (token) => {
   return fetch(`${BASE_URL}/users/me`, {
     method: 'GET',
+    credentials: 'include',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`,
+      // 'Authorization': `Bearer ${token}`,
     }
   })
     .then((res) => checkServerResponse(res));
