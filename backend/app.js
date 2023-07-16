@@ -25,7 +25,7 @@ app.use(cors({
   credentials: true,
 }));
 app.use(router);
-app.use(errorHandler);
 app.use(errorLogger);
+app.use(errorHandler);
 
 app.listen(PORT);
