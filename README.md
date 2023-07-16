@@ -9,8 +9,8 @@
 
 ## Ссылки на проект
 
-IP-адрес 130.193.34.84
+IP 130.193.34.84
 
-Frontend https://sib408.nomoredomains.xyz
+Frontend https://sib408.nomoredomains.xyz/
 
-Backend https://api.sib408.mesto.nomoredomains.xyz
+Backend https://api.sib408.mesto.nomoredomains.xyz/
