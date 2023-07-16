@@ -49,7 +49,7 @@ export class Api {
       credentials: 'include',
       body: JSON.stringify({
         name,
-         about,
+        about,
     }),
     }).then(this._checkServerResponse);
   }
@@ -95,11 +95,10 @@ export class Api {
 }
 
 export const api = new Api({
-  // baseUrl: "https://mesto.nomoreparties.co/v1/cohort-61",
-  baseUrl: "http://localhost:3000",
-  // baseUrl: "https://api.sib408.mesto.nomoredomains.xyz",
-  // headers: {
-  //   authorization: "ade24f25-d7dd-4edc-be9d-87af9f2eb31d",
-  //   "Content-Type": "application/json",
-  // },
+  // baseUrl: "http://localhost:3000",
+  baseUrl: "https://api.sib408.mesto.nomoredomains.xyz",
+  headers: {
+
+    "Content-Type": "application/json",
+  },
 });
