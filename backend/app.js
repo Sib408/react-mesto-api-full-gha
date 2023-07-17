@@ -22,6 +22,7 @@ app.use(cors({
     'http://localhost:3000',
     'http://localhost:3001',
     'https://api.sib408.mesto.nomoredomains.xyz',
+    'https://sib408.nomoredomains.xyz',
   ],
   credentials: true,
 }));
