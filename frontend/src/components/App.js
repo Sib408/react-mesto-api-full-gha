@@ -42,7 +42,7 @@ function App() {
         setCards(cards);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [loggedIn]);
 
   function handleCardClick(card) {
     setSelectedCard(card);
@@ -87,8 +87,6 @@ function App() {
   }
 
   function handleCardDelete(card) {
-    const isOwn = card.owner._id === currentUser._id;
-    if (isOwn) {
       api
         .deleteCard(card._id)
         .then(() => {
@@ -96,7 +94,7 @@ function App() {
         })
         .catch((err) => console.log(err));
     }
-  }
+
   function closeAllPopups() {
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);

@@ -17,6 +17,10 @@ router.get('/crash-test', () => {
 router.post('/signin', validateLogin, login);
 router.post('/signup', validateUser, createUsers);
 
+router.get('/signout', (req, res) => {
+  res.clearCookie('jwt').send({ message: 'Выход' });
+});
+
 router.use('/users', validateToken, usersRouter);
 router.use('/cards', validateToken, cardsRouter);
 router.use('/*', (req, res, next) => next(new NotFoundError('Данная страница не найдена')));

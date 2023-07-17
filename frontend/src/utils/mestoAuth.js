@@ -1,5 +1,5 @@
-// export const BASE_URL = "http://localhost:3000";
-export const BASE_URL =  "https://api.sib408.mesto.nomoredomains.xyz";
+export const BASE_URL = "http://localhost:3000";
+//export const BASE_URL =  "https://api.sib408.mesto.nomoredomains.xyz";
 
 function checkServerResponse(res) {
   if (res.ok) {
